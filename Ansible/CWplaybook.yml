@@ -1,0 +1,21 @@
+- name: Install CloudWatch Agent
+  hosts: all
+  become: yes
+
+  tasks:
+    - name: Install CloudWatch Agent
+      package:
+        name: amazon-cloudwatch-agent
+        state: present
+
+    - name: Configure CloudWatch Agent
+      copy:
+        src: cloudwatch-config.json
+        dest: /opt/aws/amazon-cloudwatch-agent/etc/amazon-cloudwatch-agent.json
+
+    - name: Start CloudWatch Agent
+      service:
+        name: amazon-cloudwatch-agent
+        state: started
+        enabled: yes
+

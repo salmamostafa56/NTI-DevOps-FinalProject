@@ -1,0 +1,11 @@
+[Unit]
+Description=Jenkins Service
+After=network.target
+
+[Service]
+User=jenkins
+ExecStart=/usr/bin/java -jar /opt/jenkins.war
+Restart=always
+
+[Install]
+WantedBy=multi-user.target
