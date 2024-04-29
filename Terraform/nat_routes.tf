@@ -1,9 +1,9 @@
 
-# nat Gatway
+//nat Gatway
 
 
 resource "aws_eip" "nat_eip" {
-  #vpc = true
+  //vpc = true
   domain = "vpc"
 
   tags = {
@@ -23,9 +23,9 @@ resource "aws_nat_gateway" "k8s-nat" {
 }
 
 
-#routes
+//routes
 
-# routing table
+// routing table
 resource "aws_route_table" "private" {
   vpc_id = aws_vpc.k8svpc.id
 
@@ -53,7 +53,7 @@ resource "aws_route_table" "public" {
 }
 
 
-# routing table association
+// routing table association
 
 resource "aws_route_table_association" "private-us-east-1a" {
   subnet_id      = aws_subnet.private-us-east-1a.id
