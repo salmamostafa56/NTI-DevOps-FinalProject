@@ -1,0 +1,35 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: counter-app-backend
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: counter-app-backend
+  template:
+    metadata:
+      labels:
+        app: counter-app-backend
+    spec:
+      containers:
+        - name: counter-app-backend
+          image: 339712837423.dkr.ecr.us-east-1.amazonaws.com/my-ecr-repo:latest
+          ports:
+            - containerPort: 3000
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: counter-app-backend-service
+spec:
+  selector:
+    app: counter-app-backend
+  ports:
+    - protocol: TCP
+      port: 3000
+      targetPort: 3000
+  type: ClusterIP
+

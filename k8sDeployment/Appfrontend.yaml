@@ -1,0 +1,37 @@
+
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: counter-app-frontend
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: counter-app-frontend
+  template:
+    metadata:
+      labels:
+        app: counter-app-frontend
+    spec:
+      containers:
+        - name: counter-app-frontend
+          image: 339712837423.dkr.ecr.us-east-1.amazonaws.com/my-ecr-repo:latest
+          ports:
+            - containerPort: 80
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: counter-app-frontend-service
+spec:
+  selector:
+    app: counter-app-frontend
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 80
+  type: LoadBalancer
+
+
